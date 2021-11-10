@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 55px;
+    width: 595px;
+    border-radius: 50px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.container form h2{
+    font-family: fangsong;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+.container form  .startInpNum{
+    font-family: fangsong;
+    font-weight: 500;
+    height: 50px;
+    width: 280px;
+    border-radius: 50px;
+    padding: 0 15px;
+    font-size: 24px;
+    outline: none;
+    border: 1px solid #25aae1;
+}
+.btn-hover {
+    font-family: fangsong;
+    font-size: 18px;
+    font-weight: 500;
+    width: 160px;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px auto 0;
+    height: 50px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+.btn-hover:focus {
+    outline: none;
+}
+.btn-hover.btnHoverTime {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+}
+
+
+
+.blockContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.GameBordContent{
+    display: flex;
+    justify-content: center;
+}
+span{
+    width: 70px;
+    height: 70px;
+    border: 1px solid #25aae1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    flex-direction: column;
+}
+.point{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+}
+.wall{
+    width: 70px;
+    height: 70px;
+    background-image: url(.././img/wall.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
