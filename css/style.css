@@ -27,14 +27,14 @@ input[type=number] {
     border-radius: 50px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-.container form h2{
+.container h2{
     font-family: fangsong;
     font-weight: 500;
     text-transform: capitalize;
     font-size: 30px;
     margin-bottom: 25px;
 }
-.container form  .startInpNum{
+.container .startInpNum{
     font-family: fangsong;
     font-weight: 500;
     height: 50px;
