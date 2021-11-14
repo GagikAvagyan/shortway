@@ -10,9 +10,9 @@ $('.submitBtn').click(function (){   // click for start
 });
 
 function makeMatrix(){ //  make matrix
-    for ( let i = 0; i < inpVal + 2; i++ ) {
+    for ( let i = 0; i < inpVal+2; i++ ) {
         GameBord.push([]);
-        for (let j = 0; j < inpVal + 2; j++) {
+        for (let j = 0; j < inpVal+2; j++) {
             GameBord[i].push(' ');
         }
     }
@@ -21,25 +21,26 @@ function makeMatrix(){ //  make matrix
         for (let j = 0; j < GameBord[i].length; j++){
             if(GameBord[0][j] !== 'x'){
                 GameBord[0][j] = 'x';
-                GameBord[inpVal-1][j] = 'x'
+                GameBord[inpVal+1][j] = 'x'
             }
             if(GameBord[i][0] !== 'x'){
                 GameBord[i][0] = 'x'
-                GameBord[i][inpVal-1] = 'x'
+                GameBord[i][inpVal+1] = 'x'
             }
         }
     }
+    console.log(GameBord)
     printBlocks()
 }
 
 function printBlocks() {  // Print Blocks
-    for(let i = 0; i < inpVal; i++){
+    for(let i = 1; i < inpVal+1; i++){
         $('.blockContainer').append( `<div class="GameBordSection${ i } GameBordContent"></div>` );
-        for (let j = 0; j < inpVal; j++){
+        for (let j = 1; j < inpVal+1; j++){
             $(`.GameBordSection${ i }`).append(`<span id="${ i }" class="${ j }"></span>`);
         }
     }
-    $('.1#1').text('Start');
+    // $('.1#1').text('Start');
     $('.blockContainer').append(' <input type="submit" value="SUBMIT" class="btn-hover btnHoverTime startToFind"> ');
     addEvent();
 }
@@ -85,8 +86,8 @@ function startToFindWay(){  // startToFindWay function
     }
     console.log(GameBord);
 
-    for( let i = 0; i < GameBord.length; i++){
-        for (let j = 0; j < GameBord[i].length; j++){
+    for( let i = 1; i < GameBord.length ; i++){
+        for (let j = 1; j < GameBord[i].length; j++){
             GameBord[i][j] === 'x' ? $(`#${i}.${j}`).append('<div class="wall"></div>') : '';
             GameBord[i][j] === '1' ? $(`#${i}.${j}`).append('<div class="point"></div>') : '';
         }
