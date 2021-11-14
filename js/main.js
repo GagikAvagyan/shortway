@@ -10,9 +10,9 @@ $('.submitBtn').click(function (){   // click for start
 });
 
 function makeMatrix(){ //  make matrix
-    for ( let i = 0; i < inpVal; i++ ) {
+    for ( let i = 0; i < inpVal + 2; i++ ) {
         GameBord.push([]);
-        for (let j = 0; j < inpVal; j++) {
+        for (let j = 0; j < inpVal + 2; j++) {
             GameBord[i].push(' ');
         }
     }
@@ -33,9 +33,9 @@ function makeMatrix(){ //  make matrix
 }
 
 function printBlocks() {  // Print Blocks
-    for(let i = 1; i < inpVal-1; i++){
+    for(let i = 0; i < inpVal; i++){
         $('.blockContainer').append( `<div class="GameBordSection${ i } GameBordContent"></div>` );
-        for (let j = 1; j < inpVal-1; j++){
+        for (let j = 0; j < inpVal; j++){
             $(`.GameBordSection${ i }`).append(`<span id="${ i }" class="${ j }"></span>`);
         }
     }
