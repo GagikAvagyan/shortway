@@ -1,4 +1,4 @@
-let boardBlockClassName, boardBlockIdName,  GameBord = [], userPoint = '.', inpVal;
+let boardBlockClassName, boardBlockIdName,  GameBord = [], userPoint = '1', inpVal;
 
 $('.submitBtn').click(function (){   // click for start
     inpVal = +$('.startInpNum').val();
@@ -9,145 +9,86 @@ $('.submitBtn').click(function (){   // click for start
     }
 });
 
-function makeMatrix(){
-    for ( let i = 0; i < inpVal; i++ ) {   //  make matrix
+function makeMatrix(){ //  make matrix
+    for ( let i = 0; i < inpVal; i++ ) {
         GameBord.push([]);
         for (let j = 0; j < inpVal; j++) {
-            GameBord[i].push('');
+            GameBord[i].push(' ');
         }
     }
-    GameBord[0][0] = 'S';
+
+    for(let i = 0; i <GameBord.length; i++){ // add matrix Border
+        for (let j = 0; j < GameBord[i].length; j++){
+            if(GameBord[0][j] !== 'x'){
+                GameBord[0][j] = 'x';
+                GameBord[inpVal-1][j] = 'x'
+            }
+            if(GameBord[i][0] !== 'x'){
+                GameBord[i][0] = 'x'
+                GameBord[i][inpVal-1] = 'x'
+            }
+        }
+    }
     printBlocks()
 }
 
-function printBlocks() {
-    for(let i = 0; i < inpVal; i++){   // Print Blocks
+function printBlocks() {  // Print Blocks
+    for(let i = 1; i < inpVal-1; i++){
         $('.blockContainer').append( `<div class="GameBordSection${ i } GameBordContent"></div>` );
-        for (let j = 0; j < inpVal; j++){
+        for (let j = 1; j < inpVal-1; j++){
             $(`.GameBordSection${ i }`).append(`<span id="${ i }" class="${ j }"></span>`);
         }
     }
-    $('.0#0').text('Start');
+    $('.1#1').text('Start');
     $('.blockContainer').append(' <input type="submit" value="SUBMIT" class="btn-hover btnHoverTime startToFind"> ');
     addEvent();
+}
+
+function addEvent(){  // user click
+    $('span').click(function (){
+        if( userPoint === '1' ){
+            boardBlockIdName =  $(this).attr('id');
+            boardBlockClassName =  $(this).attr('class');
+            $(this).append('<div class="point"></div>');
+        }else {
+            $(this).append('<div class="wall"></div>');
+            GameBord[$(this).attr('id')][$(this).attr('class')] = userPoint;
+        }
+        changeUsePoint( );
+    })
+    $('.startToFind').click( function (){ // startToFind button
+        clearSpan()
+        startToFindWay();
+    })
 }
 
 function changeUsePoint(){ // Change Use Point to Wall
     userPoint = 'x';
 }
 
-function addEvent(){  // user click
-    $('span').click(function (){
-        if( userPoint === '.' ){
-            boardBlockIdName =  $(this).attr('id');
-            boardBlockClassName =  $(this).attr('class');
-            $(this).append('<div class="point"></div>');
-        }else {
-            $(this).append('<div class="wall"></div>')
-        }
-        GameBord[$(this).attr('id')][$(this).attr('class')] = userPoint;
-        changeUsePoint( );
-    })
-
-    $('.startToFind').click( function (){
-        clearSpan()
-        diagonalLeft();
-        checkDialogTop();
-        checkDialogBottom();
-    })
-}
-
-function diagonalLeft(){  // check diagonal
-    const checkDiagonalLeft = [];
-    for(let i = 0; i <GameBord.length; i++){
-        for (let j = 0; j < GameBord[i].length; j++){
-            i === j ? checkDiagonalLeft.push(GameBord[i][j]) : '';
-        }
-    }
-    if( checkDiagonalLeft.some(x => x === 'x') && checkDiagonalLeft.some(x => x === '.') ){
-        for(let i = 0; i <GameBord.length; i++){
-            for (let j = 0; j < GameBord[i].length; j++){
-                if ( GameBord[i][j] === '.' ){
-                    console.log(i + ' ' + j);
-                }
-            }
-        }
-    }else if( checkDiagonalLeft.some(x => x === '.') ) {
-        for(let i = 0; i <GameBord.length; i++){
-            for (let j = 0; j < GameBord[i].length; j++){
-               GameBord[i][j] === 'x' ? $(`#${i}.${j}`).append('<div class="wall"></div>') : '';
-            }
-        }
-        while ( boardBlockIdName > -1 && boardBlockClassName > -1 ){
-            $(`#${boardBlockIdName}.${boardBlockClassName}`).append('<div class="point"></div>');
+function startToFindWay(){  // startToFindWay function
+    while ( GameBord[1][1] !== '1' ){
+        if( GameBord[boardBlockIdName][boardBlockClassName] !== 'x' ){
+            GameBord[boardBlockIdName][boardBlockClassName] = '1';
             boardBlockIdName --
             boardBlockClassName --
         }
-    }
-}
+         if(GameBord[boardBlockIdName][boardBlockClassName] === 'x'){
 
-function checkDialogTop(){ // checkDialogTop
-    let dialogTop = [];
+             if( boardBlockClassName > boardBlockIdName){
+                 boardBlockIdName ++
+             }else {
+                 boardBlockClassName ++
+             }
+
+        }
+    }
+    console.log(GameBord);
+
     for( let i = 0; i < GameBord.length; i++){
-        dialogTop = []
         for (let j = 0; j < GameBord[i].length; j++){
-            i < j ? dialogTop.push(GameBord[i][j]) : '';
-        }
-        if ( dialogTop.some(x => x === 'x') && dialogTop.some(x => x === '.') ){
-            for(let i = 0; i <GameBord.length; i++){
-                for (let j = 0; j < GameBord[i].length; j++){
-                    if ( GameBord[i][j] === '.' ){
-                        console.log(i + ' ' + j);
-                    }
-                }
-            }
-        }else if( dialogTop.some(x => x === '.') ){
-            for(let i = 0; i <GameBord.length; i++){
-                for (let j = 0; j < GameBord[i].length; j++){
-                    GameBord[i][j] === 'x' ? $(`#${i}.${j}`).append('<div class="wall"></div>') : '';
-                }
-            }
-            while ( boardBlockIdName > -1 && boardBlockClassName > -1 ){
-                $(`#${boardBlockIdName}.${boardBlockClassName}`).append('<div class="point"></div>');
-                boardBlockClassName --
-                if( boardBlockIdName == boardBlockClassName && boardBlockIdName > 0){
-                    while ( boardBlockIdName > -1 && boardBlockClassName > -1 ){
-                        $(`#${boardBlockIdName}.${boardBlockClassName}`).append('<div class="point"></div>');
-                        boardBlockIdName --
-                        boardBlockClassName --
-                    }
-                }
-            }
-        }
-    }
-}
-
-function checkDialogBottom(){ // checkDialogBottom
-    let dialogBottom = [];
-    for( let i = 1; i < GameBord.length ; i++){
-        dialogBottom = []
-        for (let j = 0; j < GameBord[i].length; j++){
-            i > j ? dialogBottom.push(GameBord[i][j]) : '';
-        }
-        if ( dialogBottom.some(x => x === 'x') && dialogBottom.some(x => x === '.') ){
-
-        } else if( dialogBottom.some(x => x === '.') ){
-            for(let i = 0; i <GameBord.length; i++){
-                for (let j = 0; j < GameBord[i].length; j++){
-                    GameBord[i][j] === 'x' ? $(`#${i}.${j}`).append('<div class="wall"></div>') : '';
-                }
-            }
-            while ( boardBlockIdName > -1 && boardBlockClassName > -1  ) {
-                $(`#${boardBlockIdName}.${boardBlockClassName}`).append('<div class="point"></div>');
-                boardBlockIdName --
-                if( boardBlockIdName == boardBlockClassName && boardBlockIdName > 0){
-                    while ( boardBlockIdName > -1 && boardBlockClassName > -1 ){
-                        $(`#${boardBlockIdName}.${boardBlockIdName}`).append('<div class="point"></div>');
-                        boardBlockClassName --
-                        boardBlockIdName --
-                    }
-                }
-            }
+            GameBord[i][j] === 'x' ? $(`#${i}.${j}`).append('<div class="wall"></div>') : '';
+            GameBord[i][j] === '1' ? $(`#${i}.${j}`).append('<div class="point"></div>') : '';
         }
     }
 }
