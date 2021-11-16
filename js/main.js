@@ -29,9 +29,9 @@ function makeMatrix(){ //  make matrix
             }
         }
     }
-    console.log(GameBord)
     printBlocks()
 }
+
 
 function printBlocks() {  // Print Blocks
     for(let i = 1; i < inpVal+1; i++){
@@ -68,23 +68,32 @@ function changeUsePoint(){ // Change Use Point to Wall
 }
 
 function startToFindWay(){  // startToFindWay function
+
     while ( GameBord[1][1] !== '1' ){
         if( GameBord[boardBlockIdName][boardBlockClassName] !== 'x' ){
             GameBord[boardBlockIdName][boardBlockClassName] = '1';
-            boardBlockIdName --
-            boardBlockClassName --
-        }
-         if(GameBord[boardBlockIdName][boardBlockClassName] === 'x'){
+            boardBlockIdName --;
+        } else if( GameBord[boardBlockIdName][boardBlockClassName] === 'x' ){
 
-             if( boardBlockClassName > boardBlockIdName){
-                 boardBlockIdName ++
-             }else {
-                 boardBlockClassName ++
-             }
+            let i = boardBlockIdName +1;
+            let j = boardBlockClassName -1;
 
+            if( GameBord[i][j] === ' '){
+                boardBlockClassName --;
+                boardBlockIdName ++;
+                GameBord[boardBlockIdName][boardBlockClassName] = '1';
+            }
+            else if( GameBord[i][j-1] !== 'x' || GameBord[i][j-1] === '1'){
+                boardBlockIdName ++;
+                boardBlockClassName ++;
+                GameBord[boardBlockIdName][boardBlockClassName] = '1';
+            }else {
+                boardBlockIdName ++;
+                boardBlockClassName ++;
+                GameBord[boardBlockIdName][boardBlockClassName] = '1';
+            }
         }
     }
-    console.log(GameBord);
 
     for( let i = 1; i < GameBord.length ; i++){
         for (let j = 1; j < GameBord[i].length; j++){
