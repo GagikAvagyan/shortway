@@ -32,7 +32,6 @@ function makeMatrix(){ //  make matrix
     printBlocks()
 }
 
-
 function printBlocks() {  // Print Blocks
     for(let i = 1; i < inpVal+1; i++){
         $('.blockContainer').append( `<div class="GameBordSection${ i } GameBordContent"></div>` );
@@ -57,6 +56,7 @@ function addEvent(){  // user click
         }
         changeUsePoint( );
     })
+
     $('.startToFind').click( function (){ // startToFind button
         clearSpan()
         startToFindWay();
@@ -70,27 +70,27 @@ function changeUsePoint(){ // Change Use Point to Wall
 function startToFindWay(){  // startToFindWay function
 
     while ( GameBord[1][1] !== '1' ){
-        if( GameBord[boardBlockIdName][boardBlockClassName] !== 'x' ){
+        if( GameBord[boardBlockIdName][boardBlockClassName] !== 'x' ){ // responsive for top step
             GameBord[boardBlockIdName][boardBlockClassName] = '1';
             boardBlockIdName --;
         } else if( GameBord[boardBlockIdName][boardBlockClassName] === 'x' ){
-
-            let i = boardBlockIdName +1;
-            let j = boardBlockClassName -1;
-
-            if( GameBord[i][j] === ' '){
+            if( GameBord[boardBlockIdName +1][boardBlockClassName -1] === ' '){ // responsive for left step
                 boardBlockClassName --;
                 boardBlockIdName ++;
                 GameBord[boardBlockIdName][boardBlockClassName] = '1';
             }
-            else if( GameBord[i][j-1] !== 'x' || GameBord[i][j-1] === '1'){
+            else if( GameBord[boardBlockIdName][boardBlockClassName] === 'x' && GameBord[boardBlockIdName +1][boardBlockClassName +1] !== 'x'){ // responsive for right step
                 boardBlockIdName ++;
                 boardBlockClassName ++;
                 GameBord[boardBlockIdName][boardBlockClassName] = '1';
-            }else {
+            }
+            else if( GameBord[boardBlockIdName +1][boardBlockClassName +1] === 'x') {
                 boardBlockIdName ++;
                 boardBlockClassName ++;
-                GameBord[boardBlockIdName][boardBlockClassName] = '1';
+                GameBord[boardBlockIdName+1][boardBlockClassName] = '1';
+            }
+            else {
+                alert('bottom')
             }
         }
     }
