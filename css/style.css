@@ -64,7 +64,7 @@ input[type=number] {
     transition: all .4s ease-in-out;
 }
 .btn-hover:hover {
-    background-position: 100% 0; 
+    background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
@@ -89,8 +89,8 @@ input[type=number] {
     justify-content: center;
 }
 span{
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border: 1px solid #25aae1;
     cursor: pointer;
     display: flex;
@@ -100,14 +100,14 @@ span{
     flex-direction: column;
 }
 .point{
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
 }
 .wall{
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     background-image: url(.././img/wall.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
